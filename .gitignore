@@ -1,8 +1,37 @@
-@"
+# Visual Studio
 .vs/
-.idea/
-**/bin/
-**/obj/
 *.user
 *.suo
-"@ | Set-Content .gitignore
+*.userosscache
+*.sln.docstates
+
+# JetBrains Rider
+.idea/
+
+# .NET build output
+[Bb]in/
+[Oo]bj/
+[Dd]ebug/
+[Rr]elease/
+
+# Test results
+TestResults/
+*.trx
+
+# NuGet packages
+*.nupkg
+packages/
+
+# Visual Studio generated files
+*.vspscc
+*.vssscc
+
+# Temporary files
+*.tmp
+*.log
+*.bak
+
+# Local secrets
+.env
+.env.*
+**/appsettings.Development.json
