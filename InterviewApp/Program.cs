@@ -28,14 +28,13 @@ class Program
                 services.AddTransient<IGreetingService, GreetingService>();
                 services.AddTransient<ITimeGreetingService, TimeGreetingService>();
 
+                services.AddSingleton(TimeProvider.System);
+                services.AddScoped<ITimeGreetingService, TimeGreetingService>();
+
                 // Register MediatR
                 services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Program).Assembly));
             })
             .Build();
-
-         //Implementation of GreetingService
-         // var greetingService = host.Services.GetRequiredService<IGreetingService>();
-        // greetingService.Run();
 
         var mediator = host.Services.GetRequiredService<IMediator>();
         string message = await mediator.Send(new GreetUserCommand());

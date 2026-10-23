@@ -1,28 +1,26 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace InterviewApp.Services.TimeGreetings
 {
     public class TimeGreetingService : ITimeGreetingService
     {
+        private readonly TimeProvider _timeProvider;
+
+        public TimeGreetingService(TimeProvider timeProvider)
+        {
+            _timeProvider = timeProvider;
+        }
+
         public string GetTimeGreeting()
         {
-            var hour = DateTime.Now.Hour;
-            if (hour < 12)
+            int hour = _timeProvider.GetLocalNow().Hour;
+
+            return hour switch
             {
-                return "Good morning!";
-            }
-            else if (hour < 18)
-            {
-                return "Good afternoon!";
-            }
-            else
-            {
-                return "Good evening!";
-            }
+                < 12 => "Good morning",
+                < 18 => "Good afternoon",
+                _ => "Good evening"
+            };
         }
     }
 }
